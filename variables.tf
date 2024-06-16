@@ -14,6 +14,10 @@ variable "security_group" {
   type    = string
   default = "ocid1.networksecuritygroup.oc1.ap-tokyo-1.aaaaaaaazvovsr73r5yrsqzbcqxjaij3zh7ijfs7je5vgxb7g2iwmvqwicba" # nsg-default
 }
+variable "env" {
+  type    = string
+  default = "develop"
+}
 variable "name" {
   type    = string
   default = "web"

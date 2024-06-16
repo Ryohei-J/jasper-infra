@@ -5,5 +5,6 @@ variable "availability_domain" {
 variable "compartment_id_sub" {}
 variable "security_group" {}
 variable "subnet_id" {}
+variable "env" {}
 variable "name" {}
 variable "ssh_keys" {}

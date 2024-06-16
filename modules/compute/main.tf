@@ -1,7 +1,8 @@
 ### コンピュートインスタンス
 resource "oci_core_instance" "this" {
+  count               = var.env == "develop" ? 1 : 2
   availability_domain = var.availability_domain
-  compartment_id_sub  = var.compartment_id_sub
+  compartment_id      = var.compartment_id_sub
   display_name        = var.name
   shape               = "VM.Standard.E4.Flex"
   shape_config {
@@ -27,16 +28,16 @@ resource "oci_core_instance" "this" {
 
 ### 予約済みパブリックIP
 resource "oci_core_public_ip" "this" {
-  compartment_id_sub = var.compartment_id_sub
-  lifetime           = "RESERVED"
-  display_name       = "lb-${var.name}"
+  compartment_id = var.compartment_id_sub
+  lifetime       = "RESERVED"
+  display_name   = "lb-${var.name}"
 }
 
 ### ロードバランサ
 resource "oci_load_balancer_load_balancer" "this" {
-  compartment_id_sub = var.compartment_id_sub
-  display_name       = "lb-${var.name}"
-  shape              = "flexible"
+  compartment_id = var.compartment_id_sub
+  display_name   = "lb-${var.name}"
+  shape          = "flexible"
   subnet_ids = [
     var.subnet_id
   ]
@@ -66,8 +67,9 @@ resource "oci_load_balancer_backend_set" "this" {
 
 # ロードバランサ バックエンド
 resource "oci_load_balancer_backend" "this" {
+  for_each         = { for idx, instance in oci_core_instance.this : idx => instance }
   backendset_name  = oci_load_balancer_backend_set.this.name
-  ip_address       = oci_core_instance.this.private_ip
+  ip_address       = each.value.private_ip
   load_balancer_id = oci_load_balancer_load_balancer.this.id
   port             = 80
 }
