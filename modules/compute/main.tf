@@ -1,7 +1,7 @@
 ### コンピュートインスタンス
 resource "oci_core_instance" "this" {
   availability_domain = var.availability_domain
-  compartment_id      = var.compartment_id
+  compartment_id_sub  = var.compartment_id_sub
   display_name        = var.name
   shape               = "VM.Standard.E4.Flex"
   shape_config {
@@ -27,16 +27,16 @@ resource "oci_core_instance" "this" {
 
 ### 予約済みパブリックIP
 resource "oci_core_public_ip" "this" {
-  compartment_id = var.compartment_id
-  lifetime       = "RESERVED"
-  display_name   = "lb-${var.name}"
+  compartment_id_sub = var.compartment_id_sub
+  lifetime           = "RESERVED"
+  display_name       = "lb-${var.name}"
 }
 
 ### ロードバランサ
 resource "oci_load_balancer_load_balancer" "this" {
-  compartment_id = var.compartment_id
-  display_name   = "lb-${var.name}"
-  shape          = "flexible"
+  compartment_id_sub = var.compartment_id_sub
+  display_name       = "lb-${var.name}"
+  shape              = "flexible"
   subnet_ids = [
     var.subnet_id
   ]

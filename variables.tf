@@ -1,8 +1,8 @@
-variable "availability_domain" {
-  type    = string
-  default = "vwEZ:AP-TOKYO-1-AD-1"
+variable "compartment_id_root" {
+  type      = string
+  sensitive = true
 }
-variable "compartment_id" {
+variable "compartment_id_sub" {
   type    = string
   default = "ocid1.compartment.oc1..aaaaaaaaqid54egyjlx6ujxbdqfkunyrc5uv5u5cc5waz3enrmfsoa2d3rdq" # develop
 }
