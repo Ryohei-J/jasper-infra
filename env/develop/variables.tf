@@ -8,7 +8,7 @@ variable "compartment_id_sub" {
 }
 variable "subnet_id" {
   type    = string
-  default = "ocid1.subnet.oc1.ap-tokyo-1.aaaaaaaabh6gcvyuwzvqegjcwrgrznqckmlumwca42iirdd3ztnq4xq5xwba" # subnet-public
+  default = "ocid1.subnet.oc1.ap-tokyo-1.aaaaaaaatctfjbcpkklqplkgkw32veoyperdb2labcif3e7bir3ke4i5ataa" # develop-public
 }
 variable "security_group" {
   type    = string

@@ -1,5 +1,5 @@
 module "compute" {
-  source = "./modules/compute"
+  source = "../../modules/compute"
 
   compartment_id_sub = var.compartment_id_sub
   security_group     = var.security_group
