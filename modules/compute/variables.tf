@@ -7,4 +7,5 @@ variable "security_group" {}
 variable "subnet_id" {}
 variable "env" {}
 variable "name" {}
+variable "shape" {}
 variable "ssh_keys" {}

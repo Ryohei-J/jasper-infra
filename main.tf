@@ -6,5 +6,6 @@ module "compute" {
   subnet_id          = var.subnet_id
   env                = var.env
   name               = var.name
+  shape              = var.shape
   ssh_keys           = var.ssh_keys
 }

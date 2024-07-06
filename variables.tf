@@ -22,6 +22,10 @@ variable "name" {
   type    = string
   default = "web"
 }
+variable "shape" {
+  type    = string
+  default = "VM.Standard.E4.Flex"
+}
 variable "ssh_keys" {
   type      = string
   sensitive = true
