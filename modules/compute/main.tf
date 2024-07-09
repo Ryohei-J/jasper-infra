@@ -3,7 +3,7 @@ resource "oci_core_instance" "this" {
   count               = var.env == "develop" ? 1 : 2
   availability_domain = var.availability_domain
   compartment_id      = var.compartment_id_sub
-  display_name        = var.name
+  display_name        = "${var.name}-${count.index}"
   shape               = var.shape
   shape_config {
     ocpus         = 1
