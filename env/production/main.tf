@@ -9,3 +9,13 @@ module "compute" {
   shape              = var.shape
   ssh_keys           = var.ssh_keys
 }
+
+module "database" {
+  source = "../../modules/database"
+
+  compartment_id_sub = var.compartment_id_sub
+  subnet_id          = var.subnet_id
+  env                = var.env
+  db_password        = var.db_password
+  db_username        = var.db_username
+}
