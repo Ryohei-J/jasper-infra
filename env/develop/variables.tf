@@ -26,16 +26,35 @@ variable "shape" {
   type    = string
   default = "VM.Standard.E4.Flex"
 }
+variable "ocpu" {
+  type    = number
+  default = 1
+}
+variable "memory" {
+  type    = number
+  default = 16
+}
+variable "source_id" {
+  type    = string
+  default = "ocid1.image.oc1.ap-tokyo-1.aaaaaaaahhqgmyj2zb3bw6wnnvkvo7godb5vqpqqtuknosn5k5uvk5wphhwa"
+}
+variable "source_type" {
+  type    = string
+  default = "image"
+}
 variable "ssh_keys" {
   type      = string
   sensitive = true
+}
+variable "shape_db" {
+  type    = string
+  default = "MySQL.HeatWave.VM.Standard"
 }
 
 variable "db_password" {
   type      = string
   sensitive = true
 }
-
 variable "db_username" {
   type      = string
   sensitive = true

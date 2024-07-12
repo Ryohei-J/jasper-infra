@@ -7,6 +7,10 @@ module "compute" {
   env                = var.env
   name               = var.name
   shape              = var.shape
+  ocpu               = var.ocpu
+  memory             = var.memory
+  source_id          = var.source_id
+  source_type        = var.source_type
   ssh_keys           = var.ssh_keys
 }
 
@@ -16,6 +20,7 @@ module "database" {
   compartment_id_sub = var.compartment_id_sub
   subnet_id          = var.subnet_id
   env                = var.env
+  shape_db           = var.shape_db
   db_password        = var.db_password
   db_username        = var.db_username
 }

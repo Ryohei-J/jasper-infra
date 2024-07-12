@@ -8,4 +8,8 @@ variable "subnet_id" {}
 variable "env" {}
 variable "name" {}
 variable "shape" {}
+variable "ocpu" {}
+variable "memory" {}
+variable "source_id" {}
+variable "source_type" {}
 variable "ssh_keys" {}

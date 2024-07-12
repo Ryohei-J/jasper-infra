@@ -5,5 +5,6 @@ variable "availability_domain" {
 variable "compartment_id_sub" {}
 variable "subnet_id" {}
 variable "env" {}
+variable "shape_db" {}
 variable "db_password" {}
 variable "db_username" {}

@@ -5,13 +5,14 @@ resource "oci_core_instance" "this" {
   compartment_id      = var.compartment_id_sub
   display_name        = "${var.name}-${count.index}"
   shape               = var.shape
+
   shape_config {
-    ocpus         = 1
-    memory_in_gbs = 16
+    ocpus         = var.ocpu
+    memory_in_gbs = var.memory
   }
   source_details {
-    source_id   = "ocid1.image.oc1.ap-tokyo-1.aaaaaaaahhqgmyj2zb3bw6wnnvkvo7godb5vqpqqtuknosn5k5uvk5wphhwa"
-    source_type = "image"
+    source_id   = var.source_id
+    source_type = var.source_type
   }
   create_vnic_details {
     nsg_ids = [
@@ -19,7 +20,6 @@ resource "oci_core_instance" "this" {
     ]
     subnet_id = var.subnet_id
   }
-
   metadata = {
     ssh_authorized_keys = var.ssh_keys
     user_data           = base64encode(file("${path.module}/userdata/init.sh"))
@@ -38,10 +38,10 @@ resource "oci_load_balancer_load_balancer" "this" {
   compartment_id = var.compartment_id_sub
   display_name   = "lb-${var.name}"
   shape          = "flexible"
+
   subnet_ids = [
     var.subnet_id
   ]
-
   network_security_group_ids = [
     var.security_group
   ]
@@ -56,13 +56,15 @@ resource "oci_load_balancer_load_balancer" "this" {
 
 # ロードバランサ バックエンドセット
 resource "oci_load_balancer_backend_set" "this" {
+  load_balancer_id = oci_load_balancer_load_balancer.this.id
+  name             = "lb-bs"
+  policy           = "ROUND_ROBIN"
+
   health_checker {
     protocol = "HTTP"
     url_path = "/"
   }
-  load_balancer_id = oci_load_balancer_load_balancer.this.id
-  name             = "lb-bs"
-  policy           = "ROUND_ROBIN"
+
 }
 
 # ロードバランサ バックエンド
